@@ -18,6 +18,7 @@ const ImageUploader = () => {
 
     reader.onload = async (event) => {
       const base64Data = event.target.result.split(',')[1]; // Extract base64 data
+      console.log(base64Data)
       setImageData(base64Data);
 
       try {
@@ -62,9 +63,19 @@ const ImageUploader = () => {
       });
     };
   };
+  const setCanvasDimensions = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+        canvas.style.height = '50vh';
+        canvas.style.width = '50vw';
+    }
+};
+
+// Call the function to set canvas dimensions
+setCanvasDimensions();
 
   return (
-    <div>
+    <div className="main h-screen w-screen flex flex-col items-center justify-evenly">
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       <h2>Bounding Box Coordinates</h2>
       <ul>
